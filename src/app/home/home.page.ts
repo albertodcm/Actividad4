@@ -9,4 +9,11 @@ export class HomePage {
 
   constructor() {}
 
+  myDate: string = new Date().toISOString();
+
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
+
 }
+

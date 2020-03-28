@@ -29,3 +29,37 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+
+.iconSize {
+  font-size: 30px;
+  padding: 0px 15px
+  
+} 
+
+.titulo {
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 4;
+} 
+
+.segmento {
+  padding: 25px 0px 25px 0px;
+}
+
+.circular {
+  font-size: 30px;
+  display:block;
+  height: 65px;
+  width: 65px;
+  border-radius: 300%;
+  border: 1px solid #1f7ac4;
+  color: #ffffff;
+  background-color: #1f7ac4;
+
+  position: fixed;
+  left: 300px;
+  bottom: 9px;
+  right: 0;
+
+}
