@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private authServ: AuthService) {}
 
   myDate: string = new Date().toISOString();
 
@@ -15,5 +16,8 @@ export class HomePage {
     console.log('Segment changed', ev);
   }
 
+  signOut() {
+    this.authServ.logout();
+  }
 }
 

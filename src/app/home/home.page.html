@@ -1,26 +1,20 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      <ion-datetime disabled class="titulo" displayFormat="MMM DD, YYYY" [(ngModel)]="myDate"></ion-datetime>
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click) = "signOut()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" >
-  <ion-header collapse="condense">
-    <ion-toolbar >
-      <ion-datetime disabled class="titulo" displayFormat="MMM DD, YYYY" [(ngModel)]="myDate"></ion-datetime>
-      <ion-icon  class="iconSize" slot="end" name="exit-outline"></ion-icon>
-    </ion-toolbar>
-  </ion-header>
-
-
+<ion-content>
     <!--   Aqui es los segmentos los botones    
     https://ionicframework.com/docs/api/segment
     -->
-
-
-
   <div >
     <ion-segment class="segmento" value="todo" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="todo">
@@ -32,17 +26,14 @@
     </ion-segment>
 
   </div>
-
         <!--   Aqui es cada recordatorio 
         tarjetas delizables: https://ionicframework.com/docs/api/item-sliding
         checkbuttons: https://ionicframework.com/docs/api/checkbox
         -->
-
-
     <ion-list>
     
       <ion-item-sliding>
-        <ion-item href="#">
+        <ion-item>
           <ion-label>
             <h2>titulo</h2>
             <p>contexto de la nota</p>
@@ -68,15 +59,8 @@
 
     </ion-list>
 
-
-
-    
-
     <button ion-button icon-only class="circular">
       <ion-icon name="add-outline"></ion-icon>
     </button>
-
-
-    
 
 </ion-content>
