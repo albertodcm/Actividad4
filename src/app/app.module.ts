@@ -24,7 +24,7 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule 
+    AngularFireAuthModule
   ],
   providers: [
     StatusBar,

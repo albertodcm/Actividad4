@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private afa: AngularFireAuth,
               private navCtrl: NavController) {}
 
-  setUser(user):void {
+  setUser(user): void {
     localStorage.setItem('user', JSON.stringify(user));
     this.user = user;
   }
@@ -29,11 +29,11 @@ export class AuthService {
       this.navCtrl.navigateForward(['/home']);
     }).catch((error) => {
       console.log(error);
-    })
+    });
   }
 
-  logout(): void{
-    this.afa.auth.signOut().then(()=> {
+  logout(): void {
+    this.afa.auth.signOut().then(() => {
       this.clearUser();
       this.navCtrl.navigateRoot(['']);
     }).catch((error) => {
@@ -43,6 +43,6 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const user = localStorage.getItem('user');
-    return (user!== null && user!== undefined);
+    return (user !== null && user !== undefined);
   }
 }
