@@ -31,7 +31,7 @@ export class NotaService {
       }))
     );
   }
-  
+
   getNote(noteId: string) {
     return this.afs.doc(`note/${noteId}`).snapshotChanges().pipe(
       map(doc => {
