@@ -26,7 +26,6 @@ export class HomePage {
   ngOnInit() {
     this.status = 'todo';
   }
-
   async openModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
@@ -35,7 +34,6 @@ export class HomePage {
     modal.present();
   }
   segmentChanged( ev: any ) {
-
     console.log('Segment changed', ev);
   }
 
