@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Nota } from 'src/models/nota.model';
 
 @Component({
   selector: 'app-modal',
@@ -7,6 +8,8 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal.page.scss'],
 })
 export class ModalPage implements OnInit {
+
+  nota = {} as Nota;
 
   constructor(private modalCtrl: ModalController) { }
 
@@ -22,6 +25,6 @@ export class ModalPage implements OnInit {
   }
 
   createNote(input: HTMLInputElement) {
-
+    console.log('sirveeeeeee');
   }
 }
