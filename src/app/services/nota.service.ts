@@ -52,5 +52,4 @@ export class NotaService {
   removeReminder(id) {
     return this.remindersCollection.doc(id).delete();
   }
-
 }
