@@ -16,7 +16,7 @@
     https://ionicframework.com/docs/api/segment
     -->
   <div >
-    <ion-segment class="segmento" value="todo" (ionChange)="segmentChanged($event)">
+    <ion-segment [(ngModel)="status"] class="segmento" value="todo" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="todo">
         <ion-label>To Do</ion-label>
       </ion-segment-button>
@@ -30,35 +30,73 @@
         tarjetas delizables: https://ionicframework.com/docs/api/item-sliding
         checkbuttons: https://ionicframework.com/docs/api/checkbox
         -->
-    <ion-list>
-    
-      <ion-item-sliding>
-        <ion-item>
-          <ion-label>
-            <h2>titulo</h2>
-            <p>contexto de la nota</p>
-          </ion-label>
-          <ion-note slot="end">
-            <ion-checkbox></ion-checkbox>
-          </ion-note>
-        </ion-item>
-    
-        <ion-item-options side="start">
-          <ion-item-option>
-            <ion-item-option >Edit</ion-item-option>
-          </ion-item-option>
-        </ion-item-options>
-    
-        <ion-item-options side="end">
-          <ion-item-option (click)="deleteNote()" color="danger" expandable>
-            Delete
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    
 
-    </ion-list>
 
+<div [ngSwitch]="'status'">
+
+
+  <ion-list *ngSwitchCase="'todo'">
+    
+    <ion-item-sliding>
+      <ion-item>
+        <ion-label>
+          <h2>titulo</h2>
+          <p>contexto de la nota</p>
+        </ion-label>
+        <ion-note slot="end">
+          <ion-checkbox></ion-checkbox>
+        </ion-note>
+      </ion-item>
+  
+      <ion-item-options side="start">
+        <ion-item-option>
+          <ion-item-option >Edit</ion-item-option>
+        </ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteNote()" color="danger" expandable>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  
+
+  </ion-list>
+
+  
+  <ion-list *ngSwitchCase="'done'">
+    
+    <ion-item-sliding>
+      <ion-item>
+        <ion-label>
+          <h2>NOTA COMPLETADA</h2>
+          <p>SE CAMBIO DE PAGINA</p>
+        </ion-label>
+        <ion-note slot="end">
+          <ion-checkbox  checked="true"></ion-checkbox>
+        </ion-note>
+      </ion-item>
+  
+      <ion-item-options side="start">
+        <ion-item-option>
+          <ion-item-option >Edit</ion-item-option>
+        </ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteNote()" color="danger" expandable>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  
+
+  </ion-list>
+</div>
+
+
+    
     <button ion-button icon-only class="circular">
       <ion-icon name="add-outline"></ion-icon>
     </button>

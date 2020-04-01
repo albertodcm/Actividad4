@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit(): void {
-    if(this.loginForm.valid) {
+    if (this.loginForm.valid) {
       console.log(this.loginForm.value);
       const email = this.loginForm.controls.email.value;
       const pwd = this.loginForm.controls.password.value;

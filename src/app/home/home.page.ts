@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { ModalController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomePage {
 
-  constructor(private authServ: AuthService) {}
+  constructor(private authServ: AuthService,
+              public navCtrl: NavController) {}
 
   myDate: string = new Date().toISOString();
 
