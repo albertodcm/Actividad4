@@ -16,7 +16,7 @@
     https://ionicframework.com/docs/api/segment
     -->
   <div >
-    <ion-segment [(ngModel)="status"] class="segmento" value="todo" (ionChange)="segmentChanged($event)">
+    <ion-segment class="segmento" [(ngModel)]="status" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="todo">
         <ion-label>To Do</ion-label>
       </ion-segment-button>
@@ -32,7 +32,7 @@
         -->
 
 
-<div [ngSwitch]="'status'">
+<div [ngSwitch]="status">
 
 
   <ion-list *ngSwitchCase="'todo'">
@@ -95,10 +95,13 @@
   </ion-list>
 </div>
 
+    <ion-buttons>
 
-    
-    <button ion-button icon-only class="circular">
-      <ion-icon name="add-outline"></ion-icon>
-    </button>
+      <ion-button icon-only class="circular" (click)="openModal()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+      
+    </ion-buttons>
+
 
 </ion-content>

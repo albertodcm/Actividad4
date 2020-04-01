@@ -11,7 +11,6 @@ export class AuthService {
 
   constructor(private afa: AngularFireAuth,
               private navCtrl: NavController) {
-                
               }
 
   setUser(user): void {
