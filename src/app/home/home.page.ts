@@ -1,31 +1,37 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ModalController, NavController, IonSegment } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
+import { Reminder, NotaService } from '../services/nota.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  status: string;
+  reminders: Reminder[];
+
+  // status: string;
 
 
   constructor(private authServ: AuthService,
               public navCtrl: NavController,
-              private modalController: ModalController) {}
+              private modalController: ModalController,
+              private notaService: NotaService) {}
 
 
   myDate: string = new Date().toISOString();
 
-  value = 'todo';
+  // value = 'todo';
 
-  // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
-    this.status = 'todo';
+    this.notaService.getReminders().subscribe(res => {
+      this.reminders = res;
+    });
   }
+
   async openModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
@@ -41,8 +47,8 @@ export class HomePage {
     this.authServ.logout();
   }
 
-  deleteNote() {
-
+  deleteReminder(pos) {
+    this.notaService.removeReminder(pos.id);
   }
 }
 

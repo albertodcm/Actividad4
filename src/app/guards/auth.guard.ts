@@ -11,17 +11,17 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanLoad {
 
   constructor(private authServ: AuthService,
-              private navCtrl: NavController){}
+              private navCtrl: NavController) {}
 
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
 
-    if(!this.authServ.isLoggedIn()) {
+    if (!this.authServ.isLoggedIn()) {
       this.navCtrl.navigateRoot(['']);
-      return false
+      return false;
     }
-    
+
     return true;
   }
 }
