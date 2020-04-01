@@ -19,5 +19,9 @@ export class HomePage {
   signOut() {
     this.authServ.logout();
   }
+
+  deleteNote() {
+
+  }
 }
 

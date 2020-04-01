@@ -10,7 +10,9 @@ export class AuthService {
   user: any;
 
   constructor(private afa: AngularFireAuth,
-              private navCtrl: NavController) {}
+              private navCtrl: NavController) {
+                
+              }
 
   setUser(user): void {
     localStorage.setItem('user', JSON.stringify(user));
