@@ -33,18 +33,29 @@ export class HomePage implements OnInit {
     this.getReminders();
   }
 
+  showEdit() {
+    this.notaService.crear = false;
+    this.openModal();
+  }
+
+  showCreate() {
+    this.notaService.crear = true;
+    this.openModal();
+  }
+
   async openModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
     });
     modal.present();
   }
-  async openEdit() {
-    const modal = await this.modalController.create({
-      component: EditPage,
-    });
-    modal.present();
-  }
+
+  // async openEdit() {
+  //   const modal = await this.modalController.create({
+  //     component: EditPage,
+  //   });
+  //   modal.present();
+  // }
 
   getReminders() {
     this.notaService.getReminders().subscribe(res => {

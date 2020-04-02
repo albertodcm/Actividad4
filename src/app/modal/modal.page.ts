@@ -10,6 +10,8 @@ import { NotaService } from '../services/nota.service';
 })
 export class ModalPage implements OnInit {
 
+  crear2: boolean;
+
   reminder: Reminder = {
     id: null,
     texto: null,
@@ -20,6 +22,7 @@ export class ModalPage implements OnInit {
               private notaService: NotaService) { }
 
   ngOnInit() {
+    this.crear2 = this.notaService.crear;
   }
 
   createReminder() {

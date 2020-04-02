@@ -9,6 +9,8 @@ import { Reminder } from 'src/models/Reminder.model';
 
 export class NotaService {
 
+  crear: boolean;
+
   constructor(private afs: AngularFirestore) {}
 
   addReminder(reminder: Reminder) {
