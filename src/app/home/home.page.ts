@@ -2,7 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ModalController, NavController, IonSegment } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
-import { Reminder, NotaService } from '../services/nota.service';
+import { NotaService } from '../services/nota.service';
+import { Reminder } from 'src/models/Reminder.model';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomePage implements OnInit {
 
   reminders: Reminder[];
 
-  // status: string;
+  status: 'todo';
 
 
   constructor(private authServ: AuthService,
@@ -27,9 +28,7 @@ export class HomePage implements OnInit {
   // value = 'todo';
 
   ngOnInit() {
-    this.notaService.getReminders().subscribe(res => {
-      this.reminders = res;
-    });
+    this.getReminders();
   }
 
   async openModal() {
@@ -39,6 +38,13 @@ export class HomePage implements OnInit {
     });
     modal.present();
   }
+
+  getReminders() {
+    this.notaService.getReminders().subscribe(res => {
+      this.reminders = res;
+    });
+  }
+
   segmentChanged( ev: any ) {
     console.log('Segment changed', ev);
   }
@@ -47,8 +53,9 @@ export class HomePage implements OnInit {
     this.authServ.logout();
   }
 
-  deleteReminder(pos) {
-    this.notaService.removeReminder(pos.id);
+  deleteReminder(pos: any) {
+    console.log('entro a deleteReminder');
+    this.notaService.removeReminder('lVH9rQE3TqzSjd28YeI7');
   }
 }
 

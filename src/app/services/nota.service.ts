@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
-
-export interface Reminder {
-  texto: string;
-  status: boolean;
-}
+import { Reminder } from 'src/models/Reminder.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,42 +9,36 @@ export interface Reminder {
 
 export class NotaService {
 
-  private remindersCollection: AngularFirestoreCollection<Reminder>;
+  constructor(private afs: AngularFirestore) {}
 
-  private reminders: Observable<Reminder[]>;
-
-  constructor(private afs: AngularFirestore) {
-    this.remindersCollection = afs.collection<Reminder>('reminder');
-
-
-    this.reminders = this.remindersCollection.snapshotChanges().pipe(
-    map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    })
-   );
+  addReminder(reminder: Reminder) {
+    reminder.id = this.afs.createId();
+    reminder.status = 'available';
+    return this.afs.collection('reminder').add(reminder);
   }
 
   getReminders() {
-    return this.reminders;
+    return this.afs.collection('reminder').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as any;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+     );
   }
 
-  getReminder(id) {
-    return this.remindersCollection.doc<Reminder>(id).valueChanges();
+  getReminder(id: string) {
+    return this.afs.collection('reminder').doc(id).valueChanges();
   }
 
-  updateReminder(reminder: Reminder, id: string) {
-    return this.remindersCollection.doc(id).update(reminder);
+  updateReminder(id: string, reminder: Reminder) {
+    return this.afs.collection('reminder').doc(id).update(reminder);
   }
 
-  addReminder(reminder: Reminder) {
-    return this.remindersCollection.add(reminder);
-  }
-
-  removeReminder(id) {
-    return this.remindersCollection.doc(id).delete();
+  removeReminder(id: string) {
+    console.log('entro a deleteReminder service');
+    return this.afs.collection('reminder').doc(id).delete();
   }
 }

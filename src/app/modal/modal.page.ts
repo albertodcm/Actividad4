@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
-import { Nota } from 'src/models/nota.model';
-import { AngularFireDatabase, AngularFireList  } from '@angular/fire/database';
-import { Reminder, NotaService } from '../services/nota.service';
-import { ActivatedRoute } from '@angular/router';
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { ModalController} from '@ionic/angular';
+import { Reminder } from 'src/models/Reminder.model';
+import { NotaService } from '../services/nota.service';
 
 @Component({
   selector: 'app-modal',
@@ -15,52 +11,30 @@ import { ActivatedRoute } from '@angular/router';
 export class ModalPage implements OnInit {
 
   reminder: Reminder = {
-    texto: 'Remindeeeerr',
-    status: true
+    id: null,
+    texto: null,
+    status: null
   };
 
-  reminderId = null;
-
   constructor(public modalCtrl: ModalController,
-              public database: AngularFireDatabase,
-              private notaService: NotaService,
-              private route: ActivatedRoute,
-              private navc: NavController,
-              ) { }
+              private notaService: NotaService) { }
 
   ngOnInit() {
-    this.reminderId = this.route.snapshot.params['id'];
-    if (this.reminderId) {
-      this.showReminder();
-    }
-  }
-
-  showReminder() {
-    this.notaService.getReminder(this.reminderId).subscribe(res => {
-      this.reminder = res;
-    });
   }
 
   createReminder() {
-    if (this.reminderId) {
-      this.notaService.updateReminder(this.reminder, this.reminderId).then(() => {
-        this.navc.navigateBack('home');
-      });
-    } else {
-      this.notaService.addReminder(this.reminder).then(() => {
-        this.navc.navigateBack('home');
-      });
-    }
+    this.notaService.addReminder(this.reminder).then(() => {
+      console.log('Reminder creado');
+      this.dismiss();
+    }).catch((error) => {
+      console.log(error);
+    })
   }
-
 
   dismiss() {
     this.modalCtrl.dismiss({
       dismissed: true
     });
   }
-
-
-
 }
 

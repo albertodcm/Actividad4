@@ -7,7 +7,7 @@
 <ion-content>
   <ion-item>
     <ion-label position="floating">Description</ion-label>
-    <ion-input placeholder="Texto" type="text" [(ngModel)] = "reminder.texto"
+    <ion-input type="text" [(ngModel)] = "reminder.texto"
     name="nota"></ion-input>
   </ion-item>
   <ion-button color="primary" expand="block" fill="solid" (click) = "createReminder()">CREATE</ion-button> 

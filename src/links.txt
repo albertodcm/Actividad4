@@ -1,0 +1,8 @@
+    <!--   Aqui es los segmentos los botones    
+    https://ionicframework.com/docs/api/segment
+    -->
+
+            <!--   Aqui es cada recordatorio 
+        tarjetas delizables: https://ionicframework.com/docs/api/item-sliding
+        checkbuttons: https://ionicframework.com/docs/api/checkbox
+        -->
