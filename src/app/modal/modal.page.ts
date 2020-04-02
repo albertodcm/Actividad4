@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController} from '@ionic/angular';
+import { ModalController, AlertController} from '@ionic/angular';
 import { Reminder } from 'src/models/Reminder.model';
 import { NotaService } from '../services/nota.service';
 
@@ -19,7 +19,8 @@ export class ModalPage implements OnInit {
   };
 
   constructor(public modalCtrl: ModalController,
-              private notaService: NotaService) { }
+              private notaService: NotaService,
+              public alertController: AlertController,) { }
 
   ngOnInit() {
     this.crear2 = this.notaService.crear;
@@ -32,6 +33,7 @@ export class ModalPage implements OnInit {
     }).catch((error) => {
       console.log(error);
     });
+    this.createAlert('Success!', 'Your To-Do has been created successfully');
   }
 
   updateReminder(this, id) {
@@ -46,5 +48,15 @@ export class ModalPage implements OnInit {
     this.modalCtrl.dismiss({
       dismissed: true
     });
+  }
+
+  async createAlert(header, subHeader) {
+
+    const alert = await this.alertController.create({
+      header,
+      subHeader,
+      buttons: ['OKAY']
+    });
+    await alert.present();
   }
 }
