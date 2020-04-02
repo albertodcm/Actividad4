@@ -37,13 +37,17 @@ export class ModalPage implements OnInit {
   }
 
   updateReminder(this, id) {
+
     console.log('Entro a update 1');
-    this.notaService.updateReminder(this.reminder, this.id).then(() => {
+
+    this.notaService.updateReminder(this.reminder, this.Id).then(() => {
+      console.log('Entro a update 2');
       this.dismiss();
       });
 
-    }
-
+  }
+  //
+  // dismiss
   dismiss() {
     this.modalCtrl.dismiss({
       dismissed: true

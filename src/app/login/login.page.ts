@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginPage implements OnInit {
 
   constructor(private navCtrl: NavController,
               private authService: AuthService,
-              public alertController: AlertController) { }
+              public alertController: AlertController,
+              private afAuth: AngularFireAuth) { }
 
   ngOnInit() {
     this.initForm();
@@ -22,7 +24,7 @@ export class LoginPage implements OnInit {
 
   initForm() {
     this.loginForm = new FormGroup ({
-      email: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(5)])
     });
   }
@@ -35,6 +37,11 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
       this.authService.login(email, pwd);
+
+      this.afAuth.auth.signInWithEmailAndPassword(email, pwd).then(cred => {
+      }).catch(err => {
+        this.loginAlert('Error!', 'Your credentials are incorrect. Please try again');
+      });
 
     } else {
       console.log('error');
