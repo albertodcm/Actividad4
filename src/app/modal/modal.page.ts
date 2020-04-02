@@ -20,7 +20,7 @@ export class ModalPage implements OnInit {
 
   constructor(public modalCtrl: ModalController,
               private notaService: NotaService,
-              public alertController: AlertController,) { }
+              public alertController: AlertController) { }
 
   ngOnInit() {
     this.crear2 = this.notaService.crear;

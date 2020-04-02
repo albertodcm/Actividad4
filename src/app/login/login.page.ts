@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -13,7 +13,8 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
   constructor(private navCtrl: NavController,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              public alertController: AlertController) { }
 
   ngOnInit() {
     this.initForm();
@@ -27,14 +28,30 @@ export class LoginPage implements OnInit {
   }
 
   onSubmit(): void {
+
+    const email = this.loginForm.controls.email.value;
+    const pwd = this.loginForm.controls.password.value;
+
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      const email = this.loginForm.controls.email.value;
-      const pwd = this.loginForm.controls.password.value;
-
       this.authService.login(email, pwd);
+
     } else {
       console.log('error');
+      if (email === '' || pwd === '' || email === null || pwd === null) {
+        this.loginAlert('Error!', 'Please fill the email and password fields.');
+      } else {
+        this.loginAlert('Error!', 'Your credentials are incorrect. Please try again');
+      }
     }
+  }
+  async loginAlert(header, subHeader) {
+
+    const alert = await this.alertController.create({
+      header,
+      subHeader,
+      buttons: ['OKAY']
+    });
+    await alert.present();
   }
 }
