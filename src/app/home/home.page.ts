@@ -5,6 +5,7 @@ import { ModalPage } from '../modal/modal.page';
 import { NotaService } from '../services/nota.service';
 import { Reminder } from 'src/models/Reminder.model';
 import { EditPage } from '../edit/edit.page';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -14,15 +15,16 @@ import { EditPage } from '../edit/edit.page';
 export class HomePage implements OnInit {
 
   reminders: Reminder[];
-
   status: 'todo';
+  reminder: Reminder;
 
 
   constructor(private authServ: AuthService,
               public navCtrl: NavController,
               private modalController: ModalController,
               private notaService: NotaService,
-              public alertController: AlertController) {
+              public alertController: AlertController,
+              private afs: AngularFirestore) {
               this.status = 'todo';
               }
 
@@ -76,6 +78,17 @@ export class HomePage implements OnInit {
     this.notaService.removeReminder(pos);
     this.deleteAlert('Success!', 'Your To-Do has been deleted successfully');
   }
+
+  doneReminder(id: string) {
+    console.log('entro a reminder a done');
+    status = 'done';
+    console.log(id);
+    // status = this.afs.status();
+    // return this.afs.collection('reminder').doc(id).valueChanges();
+
+    // this.deleteAlert('Success!', 'Your To-Do has been deleted successfully');
+  }
+
 
   async deleteAlert(header, subHeader) {
 
