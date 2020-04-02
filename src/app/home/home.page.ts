@@ -4,6 +4,7 @@ import { ModalController, NavController, IonSegment } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { NotaService } from '../services/nota.service';
 import { Reminder } from 'src/models/Reminder.model';
+import { EditPage } from '../edit/edit.page';
 
 @Component({
   selector: 'app-home',
@@ -20,12 +21,12 @@ export class HomePage implements OnInit {
   constructor(private authServ: AuthService,
               public navCtrl: NavController,
               private modalController: ModalController,
-              private notaService: NotaService) {}
+              private notaService: NotaService) {
+              this.status = 'todo';
+              }
 
 
   myDate: string = new Date().toISOString();
-
-  // value = 'todo';
 
   ngOnInit() {
     this.getReminders();
@@ -34,7 +35,12 @@ export class HomePage implements OnInit {
   async openModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
-
+    });
+    modal.present();
+  }
+  async openEdit() {
+    const modal = await this.modalController.create({
+      component: EditPage,
     });
     modal.present();
   }

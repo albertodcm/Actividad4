@@ -28,7 +28,7 @@ export class ModalPage implements OnInit {
       this.dismiss();
     }).catch((error) => {
       console.log(error);
-    })
+    });
   }
 
   dismiss() {
@@ -37,4 +37,3 @@ export class ModalPage implements OnInit {
     });
   }
 }
-
