@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { ModalController, NavController, IonSegment } from '@ionic/angular';
+import { ModalController, NavController, IonSegment, AlertController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { NotaService } from '../services/nota.service';
 import { Reminder } from 'src/models/Reminder.model';
@@ -21,7 +21,8 @@ export class HomePage implements OnInit {
   constructor(private authServ: AuthService,
               public navCtrl: NavController,
               private modalController: ModalController,
-              private notaService: NotaService) {
+              private notaService: NotaService,
+              public alertController: AlertController) {
               this.status = 'todo';
               }
 
@@ -62,6 +63,17 @@ export class HomePage implements OnInit {
   deleteReminder(pos: any) {
     console.log('entro a deleteReminder');
     this.notaService.removeReminder(pos);
+    this.deleteAlert('Success!', 'Your To-Do has been deleted successfully');
+  }
+
+  async deleteAlert(header, subHeader) {
+
+    const alert = await this.alertController.create({
+      header,
+      subHeader,
+      buttons: ['OKAY']
+    });
+    await alert.present();
   }
 }
 
