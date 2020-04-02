@@ -35,7 +35,7 @@
           <p>{{item.texto}}</p>
         </ion-label>
         <ion-note slot="end">
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox [checked] = "item.status === 'todo'"></ion-checkbox>
         </ion-note>
       </ion-item>
   

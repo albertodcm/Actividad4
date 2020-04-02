@@ -55,7 +55,7 @@ export class HomePage implements OnInit {
 
   deleteReminder(pos: any) {
     console.log('entro a deleteReminder');
-    this.notaService.removeReminder('lVH9rQE3TqzSjd28YeI7');
+    this.notaService.removeReminder(pos);
   }
 }
 

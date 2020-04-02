@@ -13,8 +13,8 @@ export class NotaService {
 
   addReminder(reminder: Reminder) {
     reminder.id = this.afs.createId();
-    reminder.status = 'available';
-    return this.afs.collection('reminder').add(reminder);
+    reminder.status = 'todo';
+    return this.afs.doc(`reminder/${reminder.id}`).set(reminder);
   }
 
   getReminders() {
